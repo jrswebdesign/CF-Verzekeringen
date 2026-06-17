@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+:root {
+  --color-coral: #ED694B;
+  --color-green: #04A76F;
+  --color-bg: #EDEDED;
+  --color-dark: #333333;
+  --color-muted: #555555;
+  --color-border: #E0E0E0;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-dark);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-up-delay {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
