@@ -36,3 +36,14 @@ body {
 .animate-fade-up-delay-2 {
   animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
 }
+
+@keyframes kenburns {
+  0%   { transform: scale(1.08) translate(0%, 0%); }
+  33%  { transform: scale(1.13) translate(-2%, 1.5%); }
+  66%  { transform: scale(1.10) translate(1.5%, -1%); }
+  100% { transform: scale(1.08) translate(0%, 0%); }
+}
+
+.animate-kenburns {
+  animation: kenburns 18s ease-in-out infinite;
+}
