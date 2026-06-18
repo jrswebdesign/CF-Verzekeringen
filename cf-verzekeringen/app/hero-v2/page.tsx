@@ -16,7 +16,6 @@ export default function HeroV2() {
   const [scrollY, setScrollY] = useState(0);
   const [mouse, setMouse] = useState({ x: 50, y: 50 });
   const [photoIndex, setPhotoIndex] = useState(0);
-
   useEffect(() => {
     const interval = setInterval(() => {
       setPhotoIndex((prev) => (prev + 1) % PHOTOS.length);
@@ -110,12 +109,13 @@ export default function HeroV2() {
       >
         {/* Staggered rij */}
         <div
-          className="relative flex items-stretch justify-center w-full"
+          className="hero-stagger-row relative flex items-stretch justify-center w-full"
           style={{ height: "calc(100vh - 200px)" }}
         >
           {/* Links — Zekerheid bovenaan */}
           <div
             className="flex flex-col items-end justify-start"
+            className="hero-text-left"
             style={{ paddingTop: "5%", marginRight: "-32vw", zIndex: 20, position: "relative", minWidth: 0, transform: `scale(${1 + phase1 * 0.15})`, opacity: Math.max(0, 1 - phase2 * 2), transformOrigin: "right center" }}
           >
             <span
@@ -131,7 +131,7 @@ export default function HeroV2() {
 
           {/* ── Bonaire eilandvorm liggend — SVG direct ── */}
           <div
-            className="relative flex-shrink-0 self-center mt-64"
+            className="relative flex-shrink-0 self-center mt-64 bonaire-island"
             style={{
               width: "clamp(620px, 94vw, 1100px)",
               height: "clamp(620px, 94vw, 1100px)",
@@ -144,6 +144,7 @@ export default function HeroV2() {
             }}
           >
             <div
+              className="bonaire-island-mask"
               style={{
                 width: "100%",
                 height: "100%",
@@ -173,6 +174,7 @@ export default function HeroV2() {
                   <img
                     src={photo}
                     alt=""
+                    className="bonaire-island-photo"
                     style={{
                       width: "100%",
                       height: "100%",
@@ -187,7 +189,7 @@ export default function HeroV2() {
 
           {/* Rechts — en hypotheken op Bonaire onderaan */}
           <div
-            className="flex flex-col items-start justify-end"
+            className="hero-text-right flex flex-col items-start justify-end"
             style={{ paddingBottom: "5%", marginLeft: "-18vw", zIndex: 20, position: "relative", minWidth: 0, transform: `scale(${1 + phase1 * 0.15})`, opacity: Math.max(0, 1 - phase2 * 2), transformOrigin: "left center" }}
           >
             <span
@@ -201,7 +203,7 @@ export default function HeroV2() {
         </div>
 
         {/* CTA */}
-        <div className="flex items-center gap-8 mt-10" style={{ zIndex: 20, position: "relative" }}>
+        <div className="hero-cta flex items-center gap-8 mt-10" style={{ zIndex: 20, position: "relative" }}>
           <a
             href="#contact"
             className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-semibold text-white transition-all duration-200 hover:bg-[#ED694B]"

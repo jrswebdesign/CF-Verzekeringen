@@ -168,8 +168,9 @@ export default function Header() {
   return (
     <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50">
 
-      {/* ── Topbalk — verborgen bij transparant ── */}
+      {/* ── Topbalk — verborgen bij transparant en op mobiel ── */}
       <div
+        className="hidden sm:block"
         style={{
           backgroundColor: "#ED694B",
           maxHeight: isTransparent ? "0" : "48px",
@@ -220,7 +221,7 @@ export default function Header() {
           backdropFilter: isTransparent ? "none" : "none",
         }}
       >
-        <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between gap-8">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-4">
 
           {/* Logo — wisselt tussen donker en licht */}
           <a href="/" className="flex-shrink-0">
@@ -233,7 +234,7 @@ export default function Header() {
               alt="Crooij & Flipse"
               width={180}
               height={40}
-              className="h-9 w-auto object-contain transition-opacity duration-300"
+              className="h-8 sm:h-9 w-auto object-contain transition-opacity duration-300"
               priority
             />
           </a>
