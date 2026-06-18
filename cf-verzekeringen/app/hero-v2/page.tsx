@@ -114,8 +114,7 @@ export default function HeroV2() {
         >
           {/* Links — Zekerheid bovenaan */}
           <div
-            className="flex flex-col items-end justify-start"
-            className="hero-text-left"
+            className="hero-text-left flex flex-col items-end justify-start"
             style={{ paddingTop: "5%", marginRight: "-32vw", zIndex: 20, position: "relative", minWidth: 0, transform: `scale(${1 + phase1 * 0.15})`, opacity: Math.max(0, 1 - phase2 * 2), transformOrigin: "right center" }}
           >
             <span
