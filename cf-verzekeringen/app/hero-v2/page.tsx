@@ -102,9 +102,62 @@ export default function HeroV2() {
 
       <HeroShader />
 
-      {/* ── Sticky hero content ── */}
+      {/* ── Mobiele hero — foto + v2 sfeer (zichtbaar op mobiel en tablet-portrait) ── */}
       <div
-        className="sticky top-0 flex flex-col items-center justify-center"
+        className="hero-mobile-section sticky top-0"
+        style={{ height: "100vh", zIndex: 10, display: "none" }}
+      >
+        {/* Slideshow foto */}
+        <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+          {PHOTOS.map((photo, i) => (
+            <div
+              key={photo}
+              style={{
+                position: "absolute",
+                inset: 0,
+                opacity: i === photoIndex ? 1 : 0,
+                transition: "opacity 0.8s ease-in-out",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={photo}
+                alt=""
+                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 40%" }}
+              />
+            </div>
+          ))}
+        </div>
+        {/* Overlays — zelfde sfeer als desktop */}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg, rgba(8,6,4,0.70) 0%, rgba(8,6,4,0.45) 50%, rgba(8,6,4,0.20) 100%)" }} />
+        <div style={{ position: "absolute", top: 0, left: 0, width: "70%", height: "55%", background: "radial-gradient(ellipse, rgba(237,105,75,0.28) 0%, transparent 70%)" }} />
+        <div style={{ position: "absolute", bottom: 0, right: 0, width: "55%", height: "45%", background: "radial-gradient(ellipse, rgba(4,167,111,0.18) 0%, transparent 70%)" }} />
+        {/* Content */}
+        <div style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 1.5rem 5rem" }}>
+          <p style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#ED694B", marginBottom: "1rem" }}>
+            Verzekeringen &amp; Hypotheken op Bonaire
+          </p>
+          <h1 style={{ fontSize: "clamp(2rem, 8vw, 3rem)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.03em", color: "white", marginBottom: "1.25rem" }}>
+            Onafhankelijk advies voor verzekeringen en hypotheken op Bonaire
+          </h1>
+          <p style={{ fontSize: "1rem", lineHeight: 1.6, color: "rgba(255,255,255,0.80)", marginBottom: "2rem" }}>
+            Persoonlijk advies, lokale kennis en begeleiding van begin tot eind.
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+            <a href="#contact" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", padding: "1rem 1.5rem", borderRadius: "1rem", background: "#ED694B", color: "white", fontWeight: 600, fontSize: "0.9rem", textDecoration: "none" }}>
+              Start Gesprek
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+            </a>
+            <a href="#informatie" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", padding: "1rem 1.5rem", borderRadius: "1rem", border: "1.5px solid rgba(255,255,255,0.35)", color: "rgba(255,255,255,0.85)", fontWeight: 500, fontSize: "0.9rem", textDecoration: "none" }}>
+              Meer informatie
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Sticky hero content — desktop + tablet-landscape ── */}
+      <div
+        className="hero-desktop-section sticky top-0 flex flex-col items-center justify-center"
         style={{ height: "100vh", paddingTop: 64, paddingBottom: 48, zIndex: 10 }}
       >
         {/* Staggered rij */}
@@ -201,7 +254,7 @@ export default function HeroV2() {
           </div>
         </div>
 
-        {/* CTA */}
+        {/* CTA — desktop */}
         <div className="hero-cta flex items-center gap-8 mt-10" style={{ zIndex: 20, position: "relative" }}>
           <a
             href="#contact"
@@ -218,6 +271,7 @@ export default function HeroV2() {
           </a>
         </div>
       </div>
+      {/* einde hero-desktop-section */}
 
       <h1 className="sr-only">Zekerheid Op Bonaire — Crooij &amp; Flipse</h1>
 

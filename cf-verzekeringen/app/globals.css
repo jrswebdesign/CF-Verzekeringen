@@ -37,6 +37,26 @@ body {
   animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
 }
 
+/* Mobiel en tablet-portrait: foto-hero tonen, island verbergen */
+@media (max-width: 1023px) and (orientation: portrait), (max-width: 639px) {
+  .hero-mobile-section {
+    display: block !important;
+  }
+  .hero-desktop-section {
+    display: none !important;
+  }
+}
+
+/* Tablet-landscape en desktop: island tonen, foto-hero verbergen */
+@media (min-width: 1024px), (min-width: 640px) and (orientation: landscape) {
+  .hero-mobile-section {
+    display: none !important;
+  }
+  .hero-desktop-section {
+    display: flex !important;
+  }
+}
+
 @media (max-width: 640px) {
   .hero-stagger-row {
     flex-direction: column !important;
