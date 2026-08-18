@@ -98,19 +98,27 @@ export default function DienstenSectionV3() {
       ))}
 
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 py-10 lg:py-14">
-        <div className="relative overflow-hidden rounded-[2rem]" style={{ background: "#0a0908" }}>
+        <div
+          className="relative overflow-hidden rounded-[2rem]"
+          style={{
+            background: "#0a0908",
+            transform: "translateZ(0)",
+            WebkitTransform: "translateZ(0)",
+            WebkitMaskImage: "-webkit-radial-gradient(white, black)",
+          }}
+        >
 
           {/* ── Achtergrond: geblurde foto + gloed + shader-animatie ── */}
-          <div aria-hidden="true" className="pointer-events-none" style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden", borderRadius: "inherit" }}>
+          <div aria-hidden="true" className="pointer-events-none" style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden", borderRadius: "2rem" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/bonaire-hero-1.png"
               alt=""
               style={{
                 position: "absolute",
-                inset: "-10%",
-                width: "120%",
-                height: "120%",
+                inset: 0,
+                width: "100%",
+                height: "100%",
                 objectFit: "cover",
                 filter: "blur(48px) saturate(1.8) brightness(0.52)",
               }}

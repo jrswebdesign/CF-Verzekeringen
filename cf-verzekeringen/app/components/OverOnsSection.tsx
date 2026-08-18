@@ -65,12 +65,10 @@ export default function OverOnsSection({ cta }: { cta?: ReactNode }) {
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const isDesktop = () => window.matchMedia("(min-width: 1024px)").matches;
-    if (reduced || !isDesktop()) return;
+    if (reduced) return;
 
     let raf = 0;
     const update = () => {
-      if (!isDesktop()) return;
       const vh = window.innerHeight;
 
       if (layer2Ref.current) {
@@ -106,35 +104,46 @@ export default function OverOnsSection({ cta }: { cta?: ReactNode }) {
 
       {/* ── Laag 1: Introductietekst — tweekoloms met afbeelding ── */}
       <div
-        className="lg:sticky lg:top-0 flex items-center lg:overflow-hidden min-h-0 lg:min-h-screen"
-        style={{ background: "#ffffff", zIndex: 1 }}
+        className="sticky top-0 flex items-center"
+        style={{ minHeight: "100vh", background: "#ffffff", zIndex: 1 }}
       >
         <div ref={layer1InnerRef} className="w-full" style={{ transformOrigin: "center top", willChange: "transform" }}>
-          <div className="max-w-[1200px] mx-auto px-6 py-20">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="max-w-[1200px] mx-auto px-6 py-8 sm:py-12 lg:py-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 items-center">
+
+              {/* Foto — bovenaan op mobiel, compact */}
+              <div className="relative overflow-hidden rounded-2xl order-1 lg:order-2 aspect-[16/9] lg:aspect-[4/3]">
+                <Image
+                  src="/hero-team.jpg"
+                  alt="Het team van Crooij & Flipse op Bonaire"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
 
               {/* Tekst */}
-              <div>
+              <div className="order-2 lg:order-1">
                 <p
-                  className="text-xs font-bold tracking-[0.2em] uppercase mb-4"
+                  className="text-xs font-bold tracking-[0.2em] uppercase mb-2 lg:mb-4"
                   style={{ color: "#ED694B" }}
                 >
                   Over CF
                 </p>
                 <h2
-                  className="text-3xl lg:text-4xl font-bold tracking-tight leading-tight mb-6"
+                  className="text-2xl lg:text-4xl font-bold tracking-tight leading-tight mb-3 lg:mb-6"
                   style={{ color: "#1A1A1A" }}
                 >
                   Wij geven je advies op maat
                 </h2>
-                <div className="space-y-4 mb-8">
-                  <p className="text-base leading-relaxed" style={{ color: "#555555" }}>
-                    CF begint elk traject met luisteren. Pas als we weten wat voor u belangrijk is, vergelijken we over alle aanbieders heen, zonder daarbij aan één verzekeraar of bank gebonden te zijn. Zo krijgt u advies dat echt bij uw situatie past, en begeleiden we u van het eerste gesprek tot lang daarna.
+                <div className="space-y-2 lg:space-y-4 mb-4 lg:mb-8">
+                  <p className="text-sm lg:text-base leading-snug lg:leading-relaxed" style={{ color: "#555555" }}>
+                    CF begint elk traject met luisteren. Pas als we weten wat voor u belangrijk is, vergelijken we over alle aanbieders heen, zonder daarbij aan één verzekeraar of bank gebonden te zijn.
                   </p>
-                  <p className="text-base leading-relaxed" style={{ color: "#555555" }}>
+                  <p className="hidden lg:block text-base leading-relaxed" style={{ color: "#555555" }}>
                     Verzekeringen en hypotheken bekijken we altijd in samenhang. Wie zijn hypotheek via CF regelt, zorgt daarmee meteen dat zijn verzekeringen daarop zijn afgestemd. Dat is de meerwaarde van een totaaltraject in plaats van losse producten.
                   </p>
-                  <p className="text-base leading-relaxed" style={{ color: "#555555" }}>
+                  <p className="text-sm lg:text-base leading-snug lg:leading-relaxed" style={{ color: "#555555" }}>
                     Al jaren het vertrouwde adres voor verzekeringen en hypotheken op Bonaire.
                   </p>
                 </div>
@@ -153,17 +162,6 @@ export default function OverOnsSection({ cta }: { cta?: ReactNode }) {
                 </a>
               </div>
 
-              {/* Foto */}
-              <div className="relative overflow-hidden rounded-2xl" style={{ aspectRatio: "4/3" }}>
-                <Image
-                  src="/hero-team.jpg"
-                  alt="Het team van Crooij & Flipse op Bonaire"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-
             </div>
           </div>
         </div>
@@ -180,12 +178,12 @@ export default function OverOnsSection({ cta }: { cta?: ReactNode }) {
       {/* ── Laag 2: Quote — schuift over laag 1 heen ── */}
       <div
         ref={layer2Ref}
-        className="lg:sticky lg:top-0 overflow-hidden"
+        className="sticky top-0 overflow-hidden"
         style={{ minHeight: "100vh", background: "#0a0908", zIndex: 2 }}
       >
         <div
           ref={layer2InnerRef}
-          className="relative lg:absolute inset-0 w-full h-full flex items-center"
+          className="absolute inset-0 flex items-center"
           style={{ transformOrigin: "center center", willChange: "transform" }}
         >
           <div aria-hidden="true" className="pointer-events-none" style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }}>
@@ -244,7 +242,7 @@ export default function OverOnsSection({ cta }: { cta?: ReactNode }) {
       {/* ── Laag 3: Drie kernfeiten — schuift over laag 2 heen ── */}
       <div
         ref={layer3Ref}
-        className="lg:sticky lg:top-0"
+        className="sticky top-0"
         style={{ minHeight: "100vh", background: "#ffffff", zIndex: 3 }}
       >
         <div ref={layer3ContentRef} className="max-w-[1200px] mx-auto px-6 py-20 lg:py-28">
