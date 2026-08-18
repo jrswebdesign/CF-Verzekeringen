@@ -185,7 +185,7 @@ export default function OverOnsSection({ cta }: { cta?: ReactNode }) {
       >
         <div
           ref={layer2InnerRef}
-          className="absolute inset-0 flex items-center"
+          className="relative lg:absolute inset-0 w-full h-full flex items-center"
           style={{ transformOrigin: "center center", willChange: "transform" }}
         >
           <div aria-hidden="true" className="pointer-events-none" style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }}>

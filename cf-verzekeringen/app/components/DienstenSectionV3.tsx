@@ -29,9 +29,17 @@ const diensten = [
 export default function DienstenSectionV3() {
   const [hovered, setHovered] = useState<number | null>(null);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [isDesktop, setIsDesktop] = useState(false);
   const mouseRef = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number>(0);
   const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const check = () => setIsDesktop(window.matchMedia("(min-width: 1024px)").matches);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -113,7 +121,7 @@ export default function DienstenSectionV3() {
             <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 70% at 50% 45%, transparent 0%, rgba(51,51,51,0.45) 100%)" }} />
           </div>
 
-          <HeroShader />
+          {isDesktop && <HeroShader />}
 
           <div className="relative px-6 py-20 lg:px-16 lg:py-28" style={{ zIndex: 2 }}>
 
@@ -152,17 +160,10 @@ export default function DienstenSectionV3() {
                     }}
                   />
 
-              {/* Links: thumbnail (mobiel) + nummer + titel */}
-              <div className="relative flex items-center lg:items-baseline gap-4 lg:gap-10 flex-1">
-                <div
-                  className="lg:hidden flex-shrink-0 overflow-hidden"
-                  style={{ width: 56, height: 56, borderRadius: 14, boxShadow: `0 0 0 1px ${d.accent}40` }}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={d.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                </div>
+              {/* Links: nummer + titel */}
+              <div className="relative flex items-baseline gap-6 lg:gap-10 flex-1">
                 <span
-                  className="hidden lg:inline text-xs font-bold tracking-[0.2em] flex-shrink-0"
+                  className="text-xs font-bold tracking-[0.2em] flex-shrink-0"
                   style={{ color: d.accent }}
                 >
                   {d.num}
