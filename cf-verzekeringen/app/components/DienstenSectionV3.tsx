@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import HeroShader from "./HeroShader";
 
 const diensten = [
   {
@@ -25,7 +26,7 @@ const diensten = [
   },
 ];
 
-export default function DienstenSectionDark() {
+export default function DienstenSectionV3() {
   const [hovered, setHovered] = useState<number | null>(null);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const mouseRef = useRef({ x: 0, y: 0 });
@@ -52,7 +53,7 @@ export default function DienstenSectionDark() {
   }, []);
 
   return (
-    <section ref={sectionRef} style={{ background: "transparent", position: "relative" }}>
+    <section ref={sectionRef} style={{ background: "#ffffff" }}>
 
       {/* Zwevende foto die de cursor volgt */}
       {diensten.map((d, i) => (
@@ -69,7 +70,7 @@ export default function DienstenSectionDark() {
             opacity: hovered === i ? 1 : 0,
             transform: hovered === i ? "scale(1) rotate(-2deg)" : "scale(0.85) rotate(-4deg)",
             transition: "opacity 0.35s ease, transform 0.35s ease",
-            boxShadow: `0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px ${d.accent}40`,
+            boxShadow: `0 20px 60px rgba(0,0,0,0.20), 0 0 0 1px ${d.accent}40`,
           }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -87,52 +88,69 @@ export default function DienstenSectionDark() {
           />
         </div>
       ))}
-      <div className="max-w-[1200px] mx-auto px-6 py-20 lg:py-28">
 
-        {/* Sectie header */}
-        <div className="flex items-end justify-between mb-16 gap-8">
-          <div>
-            <p
-              className="text-xs font-bold tracking-[0.2em] uppercase mb-3"
-              style={{ color: "rgba(255,255,255,0.35)" }}
-            >
-              Wat we doen
-            </p>
-            <h2
-              className="text-3xl lg:text-5xl font-bold tracking-tight leading-[1.05] text-white"
-            >
-              Verzekeringen<br />
-              <span style={{ color: "#ED694B" }}>&</span> Hypotheekadvies
-            </h2>
-          </div>
-          <div
-            className="hidden lg:block h-px flex-1 max-w-[200px]"
-            style={{ background: "rgba(255,255,255,0.10)" }}
-          />
-        </div>
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 py-10 lg:py-14">
+        <div className="relative overflow-hidden rounded-[2rem]" style={{ background: "#0a0908" }}>
 
-        {/* Verzekeringen — twee rijen met grote typografie */}
-        <div className="space-y-0 mb-4">
-          {diensten.map((d, i) => (
-            <a
-              key={d.num}
-              href={d.href}
-              onMouseEnter={() => setHovered(i)}
-              onMouseLeave={() => setHovered(null)}
-              className="group flex items-center justify-between gap-8 py-8 border-t relative overflow-hidden block"
+          {/* ── Achtergrond: geblurde foto + gloed + shader-animatie ── */}
+          <div aria-hidden="true" className="pointer-events-none" style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/bonaire-hero-1.png"
+              alt=""
               style={{
-                borderColor: "rgba(255,255,255,0.08)",
-                borderBottom: i === diensten.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none",
+                position: "absolute",
+                inset: "-10%",
+                width: "120%",
+                height: "120%",
+                objectFit: "cover",
+                filter: "blur(48px) saturate(1.8) brightness(0.52)",
               }}
-            >
-              {/* Hover achtergrond glow */}
-              <div
-                className="absolute inset-0 pointer-events-none transition-opacity duration-500"
-                style={{
-                  background: `radial-gradient(ellipse 60% 100% at 0% 50%, ${d.accent}12 0%, transparent 70%)`,
-                  opacity: hovered === i ? 1 : 0,
-                }}
-              />
+            />
+            <div style={{ position: "absolute", inset: 0, background: "rgba(51,51,51,0.55)" }} />
+            <div style={{ position: "absolute", top: "-10%", left: "-5%", width: "55%", height: "60%", background: "radial-gradient(ellipse, rgba(237,105,75,0.30) 0%, transparent 70%)" }} />
+            <div style={{ position: "absolute", bottom: "-10%", right: "-5%", width: "50%", height: "55%", background: "radial-gradient(ellipse, rgba(4,167,111,0.20) 0%, transparent 70%)" }} />
+            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 70% at 50% 45%, transparent 0%, rgba(51,51,51,0.45) 100%)" }} />
+          </div>
+
+          <HeroShader />
+
+          <div className="relative px-6 py-20 lg:px-16 lg:py-28" style={{ zIndex: 2 }}>
+
+            {/* Sectie header */}
+            <div className="flex items-end justify-between mb-16 gap-8">
+              <div>
+                <h2
+                  className="text-3xl lg:text-5xl font-bold tracking-tight leading-[1.05] text-white"
+                >
+                  Verzekeringen<br />
+                  <span style={{ color: "#ED694B" }}>&amp;</span> Hypotheekadvies
+                </h2>
+              </div>
+            </div>
+
+            {/* Verzekeringen — twee rijen met grote typografie */}
+            <div className="space-y-0 mb-4">
+              {diensten.map((d, i) => (
+                <a
+                  key={d.num}
+                  href={d.href}
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
+                  className="group flex items-center justify-between gap-8 py-8 border-t relative overflow-hidden block"
+                  style={{
+                    borderColor: "rgba(255,255,255,0.12)",
+                    borderBottom: i === diensten.length - 1 ? "1px solid rgba(255,255,255,0.12)" : "none",
+                  }}
+                >
+                  {/* Hover achtergrond glow */}
+                  <div
+                    className="absolute inset-0 pointer-events-none transition-opacity duration-500"
+                    style={{
+                      background: `radial-gradient(ellipse 60% 100% at 0% 50%, ${d.accent}12 0%, transparent 70%)`,
+                      opacity: hovered === i ? 1 : 0,
+                    }}
+                  />
 
               {/* Links: nummer + titel */}
               <div className="relative flex items-baseline gap-6 lg:gap-10 flex-1">
@@ -143,7 +161,7 @@ export default function DienstenSectionDark() {
                   {d.num}
                 </span>
                 <h3
-                  className="text-2xl lg:text-4xl font-bold text-white leading-tight whitespace-pre-line transition-all duration-300"
+                  className="text-2xl lg:text-4xl font-bold leading-tight whitespace-pre-line transition-all duration-300 text-white"
                   style={{
                     transform: hovered === i ? "translateX(8px)" : "translateX(0)",
                   }}
@@ -156,7 +174,7 @@ export default function DienstenSectionDark() {
               <div
                 className="relative hidden lg:flex flex-col items-end gap-4 max-w-sm text-right transition-all duration-300"
                 style={{
-                  opacity: hovered === i ? 1 : 0.4,
+                  opacity: hovered === i ? 1 : 0.55,
                   transform: hovered === i ? "translateX(0)" : "translateX(8px)",
                 }}
               >
@@ -198,7 +216,7 @@ export default function DienstenSectionDark() {
               fontSize: "clamp(8rem, 18vw, 16rem)",
               lineHeight: 1,
               color: "#ED694B",
-              opacity: 0.05,
+              opacity: 0.06,
               letterSpacing: "-0.06em",
             }}
           >
@@ -207,17 +225,17 @@ export default function DienstenSectionDark() {
 
           <div className="relative p-8 lg:p-12 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
             <div className="max-w-xl">
-              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4 leading-tight">
+              <h3 className="text-2xl lg:text-3xl font-bold mb-4 leading-tight text-white">
                 Hypotheekadvies<br />op Bonaire
               </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.50)" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
                 CF begeleidt bij eigen woning, verhuurpand en tweede huis op Bonaire. Onafhankelijk advies van oriëntatie tot aanvraag. Via CF ben je minimaal even voordelig als bij de bank direct.
               </p>
             </div>
 
             <a
               href="/hypotheek-berekenen"
-              className="flex-shrink-0 inline-flex items-center gap-2.5 px-7 py-4 rounded-xl text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 group/btn"
+              className="flex-shrink-0 inline-flex items-center gap-2.5 px-7 py-4 rounded-full text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 group/btn"
               style={{
                 background: "#ED694B",
                 color: "white",
@@ -235,6 +253,8 @@ export default function DienstenSectionDark() {
           </div>
         </div>
 
+      </div>
+        </div>
       </div>
     </section>
   );

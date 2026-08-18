@@ -162,12 +162,6 @@ export default function DienstenSection() {
 
           <div className="relative p-8 lg:p-12 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
             <div className="max-w-2xl">
-              <p
-                className="text-xs font-bold tracking-[0.18em] uppercase mb-6"
-                style={{ color: "rgba(255,255,255,0.65)" }}
-              >
-                Hypotheekadvies
-              </p>
               <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4 leading-tight">
                 Hypotheekadvies op Bonaire
               </h3>

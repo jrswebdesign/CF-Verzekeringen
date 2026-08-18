@@ -1,8 +1,12 @@
 import Image from "next/image";
-import UspSection from "./components/UspSection";
-import DienstenSection from "./components/DienstenSection";
+import UspSectionV3 from "../components/UspSectionV3";
+import DienstenSectionV3 from "../components/DienstenSectionV3";
+import OverOnsSection from "../components/OverOnsSection";
+import CTASection from "../components/CTASection";
+import FooterV3 from "../components/FooterV3";
 
-export default function Home() {
+
+export default function HeroV3() {
   return (
     <>
       <main className="relative min-h-screen flex items-end overflow-hidden">
@@ -49,7 +53,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-3 animate-fade-up-delay-2">
               <a
                 href="#contact"
-                className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl text-base font-semibold text-white cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(237,105,75,0.50)]"
+                className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-white cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(237,105,75,0.50)]"
                 style={{ backgroundColor: "#ED694B" }}
               >
                 Plan een adviesgesprek
@@ -62,7 +66,7 @@ export default function Home() {
               </a>
               <a
                 href="#informatie"
-                className="inline-flex items-center justify-center px-8 py-4 rounded-2xl text-base font-medium cursor-pointer transition-all duration-200 text-white/90 hover:bg-white hover:text-[#333333]"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-full text-base font-medium cursor-pointer transition-all duration-200 text-white/90 hover:bg-white hover:text-[#333333]"
                 style={{
                   border: "2px solid rgba(255,255,255,0.55)",
                 }}
@@ -76,8 +80,10 @@ export default function Home() {
 
       </main>
 
-      <UspSection variant="light" />
-      <DienstenSection />
+      <UspSectionV3 />
+      <DienstenSectionV3 />
+      <OverOnsSection cta={<CTASection />} />
+      <FooterV3 />
     </>
   );
 }

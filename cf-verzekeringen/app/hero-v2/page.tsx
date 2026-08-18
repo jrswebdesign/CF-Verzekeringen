@@ -134,9 +134,6 @@ export default function HeroV2() {
         <div style={{ position: "absolute", bottom: 0, right: 0, width: "55%", height: "45%", background: "radial-gradient(ellipse, rgba(4,167,111,0.18) 0%, transparent 70%)" }} />
         {/* Content */}
         <div style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 1.5rem 5rem" }}>
-          <p style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#ED694B", marginBottom: "1rem" }}>
-            Verzekeringen &amp; Hypotheken op Bonaire
-          </p>
           <h1 style={{ fontSize: "clamp(2rem, 8vw, 3rem)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.03em", color: "white", marginBottom: "1.25rem" }}>
             Onafhankelijk advies voor verzekeringen en hypotheken op Bonaire
           </h1>
