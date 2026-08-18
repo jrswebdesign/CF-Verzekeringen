@@ -93,7 +93,7 @@ export default function DienstenSectionV3() {
         <div className="relative overflow-hidden rounded-[2rem]" style={{ background: "#0a0908" }}>
 
           {/* ── Achtergrond: geblurde foto + gloed + shader-animatie ── */}
-          <div aria-hidden="true" className="pointer-events-none" style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }}>
+          <div aria-hidden="true" className="pointer-events-none" style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden", borderRadius: "inherit" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/bonaire-hero-1.png"
@@ -152,10 +152,17 @@ export default function DienstenSectionV3() {
                     }}
                   />
 
-              {/* Links: nummer + titel */}
-              <div className="relative flex items-baseline gap-6 lg:gap-10 flex-1">
+              {/* Links: thumbnail (mobiel) + nummer + titel */}
+              <div className="relative flex items-center lg:items-baseline gap-4 lg:gap-10 flex-1">
+                <div
+                  className="lg:hidden flex-shrink-0 overflow-hidden"
+                  style={{ width: 56, height: 56, borderRadius: 14, boxShadow: `0 0 0 1px ${d.accent}40` }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={d.image} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                </div>
                 <span
-                  className="text-xs font-bold tracking-[0.2em] flex-shrink-0"
+                  className="hidden lg:inline text-xs font-bold tracking-[0.2em] flex-shrink-0"
                   style={{ color: d.accent }}
                 >
                   {d.num}

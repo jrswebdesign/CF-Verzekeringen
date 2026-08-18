@@ -65,10 +65,12 @@ export default function OverOnsSection({ cta }: { cta?: ReactNode }) {
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
+    const isDesktop = () => window.matchMedia("(min-width: 1024px)").matches;
+    if (reduced || !isDesktop()) return;
 
     let raf = 0;
     const update = () => {
+      if (!isDesktop()) return;
       const vh = window.innerHeight;
 
       if (layer2Ref.current) {
@@ -104,8 +106,8 @@ export default function OverOnsSection({ cta }: { cta?: ReactNode }) {
 
       {/* ── Laag 1: Introductietekst — tweekoloms met afbeelding ── */}
       <div
-        className="sticky top-0 flex items-center overflow-hidden"
-        style={{ minHeight: "100vh", background: "#ffffff", zIndex: 1 }}
+        className="lg:sticky lg:top-0 flex items-center lg:overflow-hidden min-h-0 lg:min-h-screen"
+        style={{ background: "#ffffff", zIndex: 1 }}
       >
         <div ref={layer1InnerRef} className="w-full" style={{ transformOrigin: "center top", willChange: "transform" }}>
           <div className="max-w-[1200px] mx-auto px-6 py-20">
@@ -178,8 +180,8 @@ export default function OverOnsSection({ cta }: { cta?: ReactNode }) {
       {/* ── Laag 2: Quote — schuift over laag 1 heen ── */}
       <div
         ref={layer2Ref}
-        className="sticky top-0"
-        style={{ minHeight: "100vh", background: "#0a0908", zIndex: 2, position: "sticky", overflow: "hidden" }}
+        className="lg:sticky lg:top-0 overflow-hidden"
+        style={{ minHeight: "100vh", background: "#0a0908", zIndex: 2 }}
       >
         <div
           ref={layer2InnerRef}
@@ -242,7 +244,7 @@ export default function OverOnsSection({ cta }: { cta?: ReactNode }) {
       {/* ── Laag 3: Drie kernfeiten — schuift over laag 2 heen ── */}
       <div
         ref={layer3Ref}
-        className="sticky top-0"
+        className="lg:sticky lg:top-0"
         style={{ minHeight: "100vh", background: "#ffffff", zIndex: 3 }}
       >
         <div ref={layer3ContentRef} className="max-w-[1200px] mx-auto px-6 py-20 lg:py-28">

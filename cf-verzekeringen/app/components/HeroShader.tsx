@@ -110,7 +110,7 @@ export default function HeroShader() {
       ref={canvasRef}
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 w-full h-full"
-      style={{ zIndex: 2 }}
+      style={{ zIndex: 2, borderRadius: "inherit" }}
     />
   );
 }
