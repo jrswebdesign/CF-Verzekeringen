@@ -47,36 +47,6 @@ export default function OverOnsSection({ cta }: { cta?: ReactNode }) {
   const layer2ScrimRef = useRef<HTMLDivElement>(null);
   const layer2TextRef = useRef<HTMLDivElement>(null);
   const layer3Ref = useRef<HTMLDivElement>(null);
-  const layer3ContentRef = useRef<HTMLDivElement>(null);
-  const ctaWrapRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const closeGap = () => {
-      if (!layer3Ref.current || !layer3ContentRef.current || !ctaWrapRef.current) return;
-      const boxHeight = layer3Ref.current.getBoundingClientRect().height;
-      const contentHeight = layer3ContentRef.current.getBoundingClientRect().height;
-      const gap = Math.max(0, boxHeight - contentHeight);
-      ctaWrapRef.current.style.marginTop = `-${gap}px`;
-    };
-    closeGap();
-    if (typeof document !== "undefined" && "fonts" in document) {
-      document.fonts.ready.then(closeGap);
-    }
-
-    if (typeof ResizeObserver === "undefined" || !layer3Ref.current || !layer3ContentRef.current) {
-      window.addEventListener("resize", closeGap);
-      return () => window.removeEventListener("resize", closeGap);
-    }
-
-    const ro = new ResizeObserver(closeGap);
-    ro.observe(layer3Ref.current);
-    ro.observe(layer3ContentRef.current);
-    window.addEventListener("resize", closeGap);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", closeGap);
-    };
-  }, []);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -254,13 +224,13 @@ export default function OverOnsSection({ cta }: { cta?: ReactNode }) {
         />
       </div>
 
-      {/* ── Laag 3: Drie kernfeiten — schuift over laag 2 heen ── */}
+      {/* ── Laag 3: Drie kernfeiten — dekt laag 2 volledig af ── */}
       <div
         ref={layer3Ref}
-        className="sticky top-0"
-        style={{ minHeight: "100vh", background: "#ffffff", zIndex: 3 }}
+        className="relative"
+        style={{ background: "#ffffff", zIndex: 3 }}
       >
-        <div ref={layer3ContentRef} className="max-w-[1200px] mx-auto px-6 py-20 lg:py-28">
+        <div className="max-w-[1200px] mx-auto px-6 py-20 lg:py-28">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8">
             {kernfeiten.map((feit) => (
               <div key={feit.titel} className="flex flex-col items-center text-center">
@@ -299,11 +269,7 @@ export default function OverOnsSection({ cta }: { cta?: ReactNode }) {
         </div>
       </div>
 
-      {cta && (
-        <div ref={ctaWrapRef} className="relative" style={{ zIndex: 4 }}>
-          {cta}
-        </div>
-      )}
+      {cta}
 
     </section>
   );
