@@ -1,6 +1,6 @@
 export default function CTASection() {
   return (
-    <section className="relative overflow-hidden" style={{ background: "#0a0908" }}>
+    <section className="relative overflow-hidden" style={{ background: "#0a0908", zIndex: 4 }}>
       {/* ── Achtergrond: geblurde foto + gloed + rustige CSS-drift ── */}
       <div aria-hidden="true" className="pointer-events-none" style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
