@@ -59,8 +59,23 @@ export default function OverOnsSection({ cta }: { cta?: ReactNode }) {
       ctaWrapRef.current.style.marginTop = `-${gap}px`;
     };
     closeGap();
+    if (typeof document !== "undefined" && "fonts" in document) {
+      document.fonts.ready.then(closeGap);
+    }
+
+    if (typeof ResizeObserver === "undefined" || !layer3Ref.current || !layer3ContentRef.current) {
+      window.addEventListener("resize", closeGap);
+      return () => window.removeEventListener("resize", closeGap);
+    }
+
+    const ro = new ResizeObserver(closeGap);
+    ro.observe(layer3Ref.current);
+    ro.observe(layer3ContentRef.current);
     window.addEventListener("resize", closeGap);
-    return () => window.removeEventListener("resize", closeGap);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", closeGap);
+    };
   }, []);
 
   useEffect(() => {
